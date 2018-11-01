@@ -3,23 +3,31 @@
 <head>
 	<title>Text-Stories</title>
 	<meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="static/b-reboot.min.css">
-    <link rel="stylesheet" type="text/css" href="static/b-grid.min.css">
-    <link rel="stylesheet" type="text/css" href="static/index.css">
+	<link rel="stylesheet" type="text/css" href="static/b-reboot.min.css">
+	<link rel="stylesheet" type="text/css" href="static/b-grid.min.css">
+	<link rel="stylesheet" type="text/css" href="static/index.css">
 	<script type="text/javascript" src="static/index.js"></script>
 </head>
 <body onload="tell('zero')">
 <div><p id="user"></p></div>
 
-<ui class="navbar-top">
-	<li style="display: inline-block; font-size: 100px" onclick="next_tap('l')"><</li>
-	<li style="display: inline-block; margin-left: 85%; font-size: 100px" onclick="next_tap('r')">></li>
-</ui>
+<div class="navbar-top">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col" style="text-align: left" onclick="next_tap('l')"><</div>
+			<div class="col" style="text-align: right" onclick="next_tap('r')">></div>
+		</div>
+	</div>
+</div>
 
-<ui class="navbar-bottom">
-	<li style="display: inline-block; font-size: 100px; margin-left: 1%;" onclick="window.location='map.php'">🗺</li>
-	<li style="display: inline-block; margin-left: 31.5%; font-size: 100px; color: red;" onclick="window.location='./story/'">+</li>
-	<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='/user/'">👤</li>
-</ui>
+<div class="navbar-bottom">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col" style="text-align: left" onclick="window.location='map.php'">🗺</div>
+			<div class="col" style="text-align: center" onclick="window.location='./story/'">+</div>
+			<div class="col" style="text-align: right" onclick="window.location='/user/'">👤</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
