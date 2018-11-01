@@ -9,15 +9,15 @@
 <body onload="tell('zero')">
 <div><p id="user"></p></div>
 
-<ui style="position: fixed; top: 0; height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px;">
+<ui class="navbar-top">
 	<li style="display: inline-block; font-size: 100px" onclick="next_tap('l')"><</li>
 	<li style="display: inline-block; margin-left: 85%; font-size: 100px" onclick="next_tap('r')">></li>
-    </ui>
+</ui>
 
-<ui style="position: fixed;bottom: 0; height: 5%; width: 100%; background-color: white; border-top: 2px solid grey; padding-bottom: 30px;">
+<ui class="navbar-bottom">
 	<li style="display: inline-block; font-size: 100px; margin-left: 1%;" onclick="window.location='map.php'">🗺</li>
 	<li style="display: inline-block; margin-left: 31.5%; font-size: 100px; color: red;" onclick="window.location='./story/'">+</li>
-<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='/user/'">👤</li>
-    </ui>
+	<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='/user/'">👤</li>
+</ui>
 </body>
 </html>

@@ -10,3 +10,23 @@
 	li {
     list-style-type: none; /* Убираем маркеры */
    }
+
+	.navbar-top{
+		position: fixed;
+		height: 5%;
+		width: 100%;
+		background-color: white;
+		padding-bottom: 30px;
+		top:0;
+		border-bottom: gray solid 2px;
+	}
+
+	.navbar-bottom{
+		position: fixed;
+		height: 5%;
+		width: 100%;
+		background-color: white;
+		padding-bottom: 30px;
+		bottom:0;
+		border-top: gray solid 2px;
+	}
