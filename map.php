@@ -21,7 +21,7 @@
    	padding-left: 5%;
    }
 	</style>
-	<script type="text/javascript" src="map.js"></script>
+	<script type="text/javascript" src="static/map.js"></script>
 </head>
 <body onload="">
 <div id="main">

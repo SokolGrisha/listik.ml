@@ -10,8 +10,8 @@ if (isset($_POST['i'])) {
 <head>
 	<title>Text-Stories</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="index.css">
-	<script type="text/javascript" src="index.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/index.css">
+	<script type="text/javascript" src="static/index.js"></script>
 </head>
 <body onload="ol()">
 <div><p>'.preg_replace("/≝/", "<br>", $i).'</p></div>
