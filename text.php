@@ -12,6 +12,8 @@ if (isset($_POST['i'])) {
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<script type="text/javascript" src="index.js"></script>
+		<link rel="stylesheet" type="text/css" href="static/b-reboot.min.css">
+        <link rel="stylesheet" type="text/css" href="static/b-grid.min.css">
 </head>
 <body onload="ol()">
 <div><p>'.preg_replace("/≝/", "<br>", $i).'</p></div>

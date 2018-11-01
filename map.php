@@ -22,6 +22,8 @@
    }
 	</style>
 	<script type="text/javascript" src="static/map.js"></script>
+		<link rel="stylesheet" type="text/css" href="static/b-reboot.min.css">
+        <link rel="stylesheet" type="text/css" href="static/b-grid.min.css">
 </head>
 <body onload="">
 <div id="main">
