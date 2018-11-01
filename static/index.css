@@ -13,21 +13,20 @@
 
 	.navbar-top{
 		position: fixed;
-		height: 6%;
-		min-height: 6%;
 		width: 100%;
 		background-color: white;
 		padding-bottom: 30px;
 		top:0;
+        font-size: 100px;
 		border-bottom: gray solid 2px;
 	}
 
 	.navbar-bottom{
 		position: fixed;
-		height: 5%;
 		width: 100%;
 		background-color: white;
 		padding-bottom: 30px;
 		bottom:0;
+        font-size: 100px;
 		border-top: gray solid 2px;
 	}
