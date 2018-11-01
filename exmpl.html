@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Text Talk Story</title>
+	<title>Text-Stories</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="index.css">
-	<script type="text/javascript" src="index.js"></script>
 </head>
 <body onload="tell('zero')">
-<div><p></p></div>
-<ui style="position: fixed; top: 0; min-height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px;">
-	<li style="display: inline-block; font-size: 150%; font-size: 100px" onclick="next_tap('l')"><</li>
-<li style="display: inline-block; margin-left: 40%; font-size: 100px;" onclick="window.location='./story/'">+</li>
-<li style="display: inline-block; margin-left: 38%; font-size: 150%; font-size: 100px" onclick="next_tap('r')">></li>
-    </ui>
+<div><p id="user"></p></div>
+
+<ui style="position: fixed; top: 0; height: 6%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px; text-align: center;">
+	<li style="display: inline-block; font-size: 100px;" onclick="window.location='/'">🏠</li>
+</ui>
+
+<ui style="position: fixed;bottom: 0; height: 5%; width: 100%; background-color: white; border-top: 2px solid grey; padding-bottom: 30px;">
+	<li style="display: inline-block; font-size: 100px; margin-left: 1%;" onclick="window.location='map.php'">🗺</li>
+	<li style="display: inline-block; margin-left: 31.5%; font-size: 100px; color: red;" onclick="window.location='./story/'">+</li>
+	<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='/user/'">👤</li>
+</ui>
 </body>
 </html>
