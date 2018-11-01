@@ -3,7 +3,7 @@ error_reporting(E_ERROR | E_PARSE);
 if (isset($_POST['i'])) {
 	if(file_exists("./story/".hash("crc32", $_POST['i']).".txt")==False&&hash("crc32", $_POST['i'])!="00000000"&&hash("crc32", explode("≟",$_POST['i'])[1])!="00000000"){
 	file_put_contents("./story/".hash("crc32", $_POST['i']).".txt", $_POST['i']);
-	$i=;
+	$i=explode("≟", $_POST['i'])[1];
 	file_put_contents("./story/".hash("crc32", $_POST['i']).".html", '
 <!DOCTYPE html>
 <html>

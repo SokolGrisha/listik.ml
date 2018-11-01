@@ -64,3 +64,9 @@ function next_tap(p){
 		tell(window.nextl);
 	}
 }
+
+function ol(){
+    document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(document.getElementsByTagName("p")[0].innerText.length)+'% 0px 10px 18px;';
+    window.now=window.location.href.split("story/")[1].split(".html")[0];
+    take_next()
+}
