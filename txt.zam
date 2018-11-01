@@ -1,0 +1,41 @@
+/* 
+tak 4ito-to ne tak<div><br></div><div>Ans</div><div><br></div><div>Teper eche</div>
+*/
+
+// html to text
+
+hm_div=(a.split("<div>").length - 1)
+hm_br=(a.split("<br>").length - 1)
+hm_sdiv=(a.split("</div>").length - 1)
+
+for(var i=0;i!=hm_div;i++){a=a.replace("<div>","\n")};
+for(var i=0;i!=hm_br;i++){a=a.replace("<br>","")};
+for(var i=0;i!=hm_sdiv;i++){a=a.replace("</div>","")};
+
+// txt to deftxt
+hm_rn=(a.split("\n").length - 1)
+for(var i=0;i!=hm_div;i++){a=a.replace("\n","≝")};
+
+// send txt
+var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+var xh = new XH();
+xh.open('POST', "./text.php, true);
+xh.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xmlhttp.send("i="+encodeURIComponent(a))
+xh.onload = function() {window.ans=xh.responseText}
+xh.onerror = function() {}
+xh.send()
+
+/* 
+take stories
+*/
+
+var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+var xh = new XH();
+xh.open('GET', "./index.txt", true);
+xh.onload = function() {
+a=xh.responseText.split(",")
+for(int i=0;i!=a.length;i++){if(a[i]==window.now){window.next=a[i+1]}}
+}
+xh.onerror = function() {}
+xh.send()

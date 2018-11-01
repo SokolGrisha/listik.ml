@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /story/
+Disallow: /story/index.html
+Disallow: /index.css
+Disallow: /index.txt
+Disallow: /index.js
+Disallow: /text.php
+Disallow: /index.html

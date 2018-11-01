@@ -1,0 +1,682 @@
+Index: story/index.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- story/index.php	(date 1540848587756)
++++ story/index.php	(date 1540848587756)
+@@ -0,0 +1,72 @@
++<!DOCTYPE html>
++<html>
++<head>
++	<?php session_start(); if(isset($_SESSION["u"])){echo '<script type="text/javascript">window.u="'.$_SESSION["u"].'"</script>';} ?>
++	<title>Text-Stories</title>
++	<meta charset="utf-8">
++	 </head>
++<style type="text/css">
++	p{
++		position: center;
++		height: 100%;
++		min-width: 10%;
++		padding: 20% 0px 10px 10px;
++		outline: none;
++	-moz-appearance: none;
++	overflow: none;
++	}
++	body{
++		font-size: 42px;
++	}
++	li {
++    list-style-type: none; /* Убираем маркеры */
++   }
++</style>
++<script type="text/javascript">
++	function send() {
++a=document.getElementsByTagName("p")[0].innerHTML
++hm_div=(a.split("<div>").length - 1)
++hm_br=(a.split("<br>").length - 1)
++hm_sdiv=(a.split("</div>").length - 1)
++
++for(var i=0;i!=hm_div;i++){a=a.replace("<div>","\n")};
++for(var i=0;i!=hm_br;i++){a=a.replace("<br>","")};
++for(var i=0;i!=hm_sdiv;i++){a=a.replace("</div>","")};
++
++// txt to deftxt
++hm_rn=(a.split("\n").length - 1)
++for(var i=0;i!=hm_div;i++){a=a.replace("\n","≝")};
++
++// send txt
++if(window.u==undefined){
++var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++var xh = new XH();
++xh.open('POST', "/text.php", true);
++xh.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
++xh.send("i="+encodeURIComponent("none≟"+a))
++xh.onload = function() {window.location=xh.responseText}
++xh.onerror = function() {}}
++else{
++var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++var xh = new XH();
++xh.open('POST', "/text.php", true);
++xh.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
++xh.send("i="+encodeURIComponent(window.u+"≟"+a))
++xh.onload = function() {window.location=xh.responseText}
++xh.onerror = function() {}
++}
++}
++</script>
++<body onload="document.getElementsByTagName('p')[0].focus()">
++<div><p contenteditable="true"></p></div>
++<ui style="position: fixed; top: 0; height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 100px" onclick="window.location='/'"><</li>
++    </ui>
++
++<ui style="position: fixed;bottom: 0; height: 5%; width: 100%; background-color: white; border-top: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 100px; margin-left: 1%;" onclick="window.location='map.php'">🗺</li>
++	<li style="display: inline-block; margin-left: 30%; font-size: 100px; color: red;" onclick="send()">📢</li>
++<li style="display: inline-block; margin-left: 25%; font-size: 100px" onclick="window.location='/user/'">👤</li>
++    </ui>
++</body>
++</html>
+\ No newline at end of file
+Index: map.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- map.php	(date 1541093096866)
++++ map.php	(date 1541093096866)
+@@ -0,0 +1,53 @@
++
++<!DOCTYPE html>
++<html>
++<head>
++	<title>Text Talk Story</title>
++	<meta charset="utf-8">
++	<style type="text/css">
++			#main{
++		position: center;
++		height: 100%;
++		min-width: 10%;
++		padding: 20% 0px 20% 10px;
++	}
++	body{
++		font-size: 42px;
++	}
++	li {
++    list-style-type: none; /* Убираем маркеры */
++   }
++   #point{
++   	padding-top: 5%;
++   	padding-left: 5%;
++   }
++	</style>
++	<script type="text/javascript" src="map.js"></script>
++</head>
++<body onload="">
++<div id="main">
++<?php
++error_reporting(E_ERROR | E_PARSE);
++$ans=explode(",",file_get_contents("index.txt"));
++$test=[];
++for ($i=0; $i < count($ans); $i++) { 
++	if(in_array($test,$ans[$i])==False&&$ans[$i]!=""){
++		array_push($test,$ans[$i]);
++			$con=file_get_contents("story/".$ans[$i].".txt");
++			if(isset(explode("≟",($con))[1])){$con=explode("≟",($con))[1];}
++		echo '<div id="point">'.substr($con,0,44).'<a href="/story/'.$ans[$i].'.html">...</a></div>';
++	}
++}
++ ?>
++</div>
++
++<ui style="position: fixed; top: 0; height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 100px" onclick="window.location='/'"><</li>
++    </ui>
++
++<ui style="position: fixed;bottom: 0; height: 5%; width: 100%; background-color: white; border-top: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; margin-left: 47.4%; font-size: 100px; color: red;" onclick="window.location='./story/'">+</li>
++<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='/user/'">👤</li>
++    </ui>
++</body>
++</html>
+\ No newline at end of file
+Index: index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- index.css	(date 1541091385120)
++++ index.css	(date 1541091385120)
+@@ -0,0 +1,12 @@
++	p{
++		position: center;
++		height: 100%;
++		min-width: 10%;
++		padding: 20% 0px 10px 10px;
++	}
++	body{
++		font-size: 60px
++	}
++	li {
++    list-style-type: none; /* Убираем маркеры */
++   }
+\ No newline at end of file
+Index: text.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- text.php	(date 1541093860933)
++++ text.php	(date 1541093860933)
+@@ -0,0 +1,34 @@
++<?php 
++error_reporting(E_ERROR | E_PARSE);
++if (isset($_POST['i'])) {
++	if(file_exists("./story/".hash("crc32", $_POST['i']).".txt")==False&&hash("crc32", $_POST['i'])!="00000000"&&hash("crc32", explode("≟",$_POST['i'])[1])!="00000000"){
++	file_put_contents("./story/".hash("crc32", $_POST['i']).".txt", $_POST['i']);
++	$i=;
++	file_put_contents("./story/".hash("crc32", $_POST['i']).".html", '
++<!DOCTYPE html>
++<html>
++<head>
++	<title>Text-Stories</title>
++	<meta charset="utf-8">
++	<link rel="stylesheet" type="text/css" href="index.css">
++	<script type="text/javascript" src="index.js"></script>
++</head>
++<body onload="ol()">
++<div><p>'.preg_replace("/≝/", "<br>", $i).'</p></div>
++
++<ui style="position: fixed; top: 0; height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px; text-align: center;">
++	<a href="/" style="font-size: 100px">🏠</a>
++    </ui>
++
++<ui style="position: fixed;bottom: 0; height: 5%; width: 100%; background-color: white; border-top: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 100px; margin-left: 1%;" onclick="window.location='."'map.php'".'">🗺</li>
++	<li style="display: inline-block; margin-left: 31.5%; font-size: 100px; color: red;" onclick="window.location='."'/story/'".'">+</li>
++<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='."'/user/'".'">👤</li>
++    </ui>
++</body>
++</html>');
++	$ish=fopen("index.txt", "a");
++	fwrite($ish, ",".hash("crc32", $_POST['i']));
++	fclose($ish);
++	echo "/story/".hash("crc32", $_POST['i']).".html";
++}} ?>
+\ No newline at end of file
+Index: exmpl.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- exmpl.html	(date 1540812444130)
++++ exmpl.html	(date 1540812444130)
+@@ -0,0 +1,17 @@
++<!DOCTYPE html>
++<html>
++<head>
++	<title>Text Talk Story</title>
++	<meta charset="utf-8">
++	<link rel="stylesheet" type="text/css" href="index.css">
++	<script type="text/javascript" src="index.js"></script>
++</head>
++<body onload="tell('zero')">
++<div><p></p></div>
++<ui style="position: fixed; top: 0; min-height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 150%; font-size: 100px" onclick="next_tap('l')"><</li>
++<li style="display: inline-block; margin-left: 40%; font-size: 100px;" onclick="window.location='./story/'">+</li>
++<li style="display: inline-block; margin-left: 38%; font-size: 150%; font-size: 100px" onclick="next_tap('r')">></li>
++    </ui>
++</body>
++</html>
+\ No newline at end of file
+Index: robots.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- robots.txt	(date 1540812551894)
++++ robots.txt	(date 1540812551894)
+@@ -0,0 +1,8 @@
++User-Agent: *
++Allow: /story/
++Disallow: /story/index.html
++Disallow: /index.css
++Disallow: /index.txt
++Disallow: /index.js
++Disallow: /text.php
++Disallow: /index.html
+\ No newline at end of file
+Index: story/index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- story/index.css	(date 1540751636754)
++++ story/index.css	(date 1540751636754)
+@@ -0,0 +1,12 @@
++	p{
++		position: center;
++		height: 100%;
++		min-width: 10%;
++		padding: 20% 0px 10px 10px;
++	}
++	body{
++		font-size: 42px;
++	}
++	li {
++    list-style-type: none; /* Убираем маркеры */
++   }
+\ No newline at end of file
+Index: index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- index.js	(date 1541022047776)
++++ index.js	(date 1541022047776)
+@@ -0,0 +1,66 @@
++function pp(i){
++		if((10-Math.round(i*2/250))>10){return (10-Math.round(i*2/250))}
++		else{return 10};
++	}
++
++function tell(id){
++		window.now=id;
++		take_next()
++		var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++		var xh = new XH();
++		xh.open('GET', "/story/"+id+".txt", true);
++		xh.onload = function() {
++			if(xh.responseText.split("≟")[0]!=xh.responseText){
++				document.getElementById("user").innerHTML='<a> Написал(а):'+xh.responseText.split("≟")[0]+'</a><br>';
++				text=xh.responseText.split("≟")[1];
++			}
++			else{text=xh.responseText;}
++			hm_rn=(text.split("≝").length - 1)
++			for(var i=0;i!=hm_rn;i++){text=text.replace("≝","\n")};
++			var i=0;
++		window.timerId = setInterval(function() {
++			if(i<text.length){
++				if(text[i]!="\n"){document.getElementsByTagName('p')[0].innerHTML+=text[i];}
++				if(text[i]=="\n"){document.getElementsByTagName('p')[0].innerHTML+="<br>"}
++				i+=1;document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(i)+'% 0px 10px 18px;';
++			}
++		}, 60);
++		}
++		xh.onerror = function() {}
++		xh.send()
++	}
++
++function take_next(){
++var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++var xh = new XH();
++xh.open('GET', "/index.txt", true);
++xh.onload = function() {rtn(xh.responseText);}
++xh.onerror = function() {}
++xh.send()
++
++function rtn(it){
++	it=it.split(",");
++	for(var i=0;i!=it.length;i++){
++		if(it[i]==window.now&&it[i+1]!=window.now&&it[i+1]!=""){window.nextr=it[i+1]}
++	};
++	for(var i=it.length-1;i!=-1;i--){
++		if(it[i]==window.now&&it[i-1]!=window.now&&it[i+1]!=""){window.nextl=it[i-1]}
++	};
++}
++
++}
++
++
++function next_tap(p){
++	take_next()
++	if(p=="r"&&window.nextr!=undefined){
++		clearInterval(window.timerId);
++		document.getElementsByTagName('p')[0].innerHTML="";
++		tell(window.nextr);
++	}
++	if(p=="l"&&window.nextl!=undefined){
++		clearInterval(window.timerId);
++		document.getElementsByTagName('p')[0].innerHTML="";
++		tell(window.nextl);
++	}
++}
+\ No newline at end of file
+Index: map.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- map.js	(date 1540836697522)
++++ map.js	(date 1540836697522)
+@@ -0,0 +1,26 @@
++function map() {
++var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++var xh = new XH();
++xh.open('GET', "/index.txt", true);
++xh.onload = function() {
++	ind=xh.responseText.split(",")
++	window.map=[];
++	for(var i=0;i!=ind.length;i++){if(ind[i] in window.map==false){window.map.push(ind[i]);}}
++	addtohtml(window.map)
++}
++xh.onerror = function() {}
++xh.send()
++function addtohtml(ind){
++	for(var i=0;i!=ind.length;i++){
++		var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++		var xh = new XH();
++		xh.open('GET', "/story/"+ind[i]+".txt", true);
++		xh.onload = function() {
++			alert(xh.responseText,ind[i]);
++			document.getElementsByTagName('div')[0].innerHTML='<div id="point">'+xh.responseText+'<a href="'+ind[i]+'">...</a></div>'+document.getElementsByTagName('div')[0].innerHTML}
++	xh.onerror = function() {}
++	xh.send()
++	}
++}
++
++}
+\ No newline at end of file
+Index: ts.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ts.php	(date 1540899977846)
++++ ts.php	(date 1540899977846)
+@@ -0,0 +1,4 @@
++<?php
++session_start(); 
++$_SESSION["u"]="Broken";
++ ?>
+Index: index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- index.html	(date 1541021988598)
++++ index.html	(date 1541021988598)
+@@ -0,0 +1,23 @@
++<!DOCTYPE html>
++<html>
++<head>
++	<title>Text-Stories</title>
++	<meta charset="utf-8">
++	<link rel="stylesheet" type="text/css" href="index.css">
++	<script type="text/javascript" src="index.js"></script>
++</head>
++<body onload="tell('zero')">
++<div><p id="user"></p></div>
++
++<ui style="position: fixed; top: 0; height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 100px" onclick="next_tap('l')"><</li>
++	<li style="display: inline-block; margin-left: 85%; font-size: 100px" onclick="next_tap('r')">></li>
++    </ui>
++
++<ui style="position: fixed;bottom: 0; height: 5%; width: 100%; background-color: white; border-top: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 100px; margin-left: 1%;" onclick="window.location='map.php'">🗺</li>
++	<li style="display: inline-block; margin-left: 31.5%; font-size: 100px; color: red;" onclick="window.location='./story/'">+</li>
++<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='/user/'">👤</li>
++    </ui>
++</body>
++</html>
+\ No newline at end of file
+Index: index.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- index.txt	(date 1541004808568)
++++ index.txt	(date 1541004808568)
+@@ -0,0 +1,1 @@
++zero,e3a40da4,3239076f,6ff5d1ce,3c7b3059,5b248232,b0389ac5,2f2ba3c9,d4204bca,88b8e5be,55f1292a,a559fe9e,6409c2aa
+\ No newline at end of file
+Index: txt.zam
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- txt.zam	(date 1540767665642)
++++ txt.zam	(date 1540767665642)
+@@ -0,0 +1,41 @@
++/* 
++tak 4ito-to ne tak<div><br></div><div>Ans</div><div><br></div><div>Teper eche</div>
++*/
++
++// html to text
++
++hm_div=(a.split("<div>").length - 1)
++hm_br=(a.split("<br>").length - 1)
++hm_sdiv=(a.split("</div>").length - 1)
++
++for(var i=0;i!=hm_div;i++){a=a.replace("<div>","\n")};
++for(var i=0;i!=hm_br;i++){a=a.replace("<br>","")};
++for(var i=0;i!=hm_sdiv;i++){a=a.replace("</div>","")};
++
++// txt to deftxt
++hm_rn=(a.split("\n").length - 1)
++for(var i=0;i!=hm_div;i++){a=a.replace("\n","≝")};
++
++// send txt
++var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++var xh = new XH();
++xh.open('POST', "./text.php, true);
++xh.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
++xmlhttp.send("i="+encodeURIComponent(a))
++xh.onload = function() {window.ans=xh.responseText}
++xh.onerror = function() {}
++xh.send()
++
++/* 
++take stories
++*/
++
++var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++var xh = new XH();
++xh.open('GET', "./index.txt", true);
++xh.onload = function() {
++a=xh.responseText.split(",")
++for(int i=0;i!=a.length;i++){if(a[i]==window.now){window.next=a[i+1]}}
++}
++xh.onerror = function() {}
++xh.send()
+\ No newline at end of file
+Index: user/index.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- user/index.php	(date 1540900171673)
++++ user/index.php	(date 1540900171673)
+@@ -0,0 +1,5 @@
++<?php 
++ session_start();
++ if(isset($_SESSION['u'])){echo '<script type="text/javascript">window.location="/";</script>';}
++ else{echo '<script type="text/javascript">window.location="login.html"</script>';}
++ ?>
+\ No newline at end of file
+Index: user/login.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- user/login.php	(date 1540847196110)
++++ user/login.php	(date 1540847196110)
+@@ -0,0 +1,14 @@
++<?php
++session_start();
++if(isset($_POST["user"])&&isset($_POST["pass"])){
++	if(isset($_POST["enter"])&&is_dir($_POST["user"])){
++	if(hash("sha256",$_POST["pass"])==file_get_contents("./".$_POST["user"]."/pas.sha256"))
++		$_SESSION["u"]=$_POST["user"];
++	}
++	if(isset($_POST["sign"])&&is_dir($_POST["user"])==False){
++		mkdir("./".$_POST["user"]);
++		file_put_contents("./".$_POST["user"]."/pas.sha256", hash("sha256",$_POST["pass"]));
++		$_SESSION["u"]=$_POST["user"];
++	}
++}
++  ?>
+\ No newline at end of file
+Index: story/zero.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- story/zero.txt	(date 1540849376571)
++++ story/zero.txt	(date 1540849376571)
+@@ -0,0 +1,1 @@
++User≟Здравствуй, пользователь или случайный посетитель!≝Ты находишься на территории text-stories.tk, где ты можешь добавить\прочитать историю!≝P.S. Мы сейчас находимся в состоянии Алфа-тестирования.≝≝Приятного чтения,≝  Разработчик!
+\ No newline at end of file
+Index: user/login.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- user/login.html	(date 1540845519068)
++++ user/login.html	(date 1540845519068)
+@@ -0,0 +1,54 @@
++<!DOCTYPE html>
++<html>
++<head>
++	<title>Text-Stories</title>
++	<meta charset="utf-8">
++	<style type="text/css">
++	div{
++		position: center;
++		height: 100%;
++		min-width: 10%;
++		padding: 20% 0px 10px 10px;
++		outline: none;
++	-moz-appearance: none;
++	overflow: none;
++	}
++	body{
++		font-size: 100px
++	}
++	li {
++    list-style-type: none; /* Убираем маркеры */
++   }
++   button{
++   	font-size: 60px;
++   	border: 2px solid grey;
++   	border-radius: 5px;
++   	background-color: lightgery;
++   }
++   input{
++   	font-size: 60px;
++   	border: 2px solid grey;
++   	border-radius: 5px;
++   }
++</style>
++</head>
++<body>
++<div>
++	<form action="login.php" method="POST">
++		@:<input type="text" name="user" size="10"><br>
++		<a style="font-size: 80px;">Пароль:</a><input type="password" name="pass" size="10"><br>
++		<button type="submit" name="enter">Войти</button><button type="submit" name="sign" style="margin-left: 10%;">Зарегестрироваться</button>
++	</form>
++</div>
++
++<ui style="position: fixed; top: 0; min-height: 5%; width: 100%; background-color: white; border-bottom: 2px solid grey; padding-bottom: 30px;text-align: center; font-size: 60px;">
++	Вход\Регистрация
++    </ui>
++
++<ui style="position: fixed;bottom: 0; height: 5%; width: 100%; background-color: white; border-top: 2px solid grey; padding-bottom: 30px;">
++	<li style="display: inline-block; font-size: 100px; margin-left: 1%;" onclick="window.location='/map.php'">🗺</li>
++	<li style="display: inline-block; margin-left: 31.5%; font-size: 100px; color: red;" onclick="window.location='/story/'">+</li>
++<li style="display: inline-block; margin-left: 30%; font-size: 100px" onclick="window.location='/user/'"></li>
++    </ui>
++</body>
++</html>
+\ No newline at end of file
+Index: story/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- story/index.js	(date 1540768317991)
++++ story/index.js	(date 1540768317991)
+@@ -0,0 +1,58 @@
++function ol(){
++	document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(document.getElementsByTagName("p")[0].innerText.length)+'% 0px 10px 18px;';
++	window.now=window.location.href.split("story/")[1].split(".html")[0];
++	take_next()
++}
++
++function pp(i){
++		if((10-Math.round(i*2/250))>10){return (10-Math.round(i*2/250))}
++		else{return 10};
++	}
++
++function tell(id){
++		window.now=id;
++		take_next()
++		var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++		var xh = new XH();
++		xh.open('GET', "/story/"+id+".txt", true);
++		xh.onload = function() {
++			var text=xh.responseText;
++			hm_rn=(text.split("≝").length - 1)
++			for(var i=0;i!=hm_rn;i++){text=text.replace("≝","\n")};
++			var i=0;
++		window.timerId = setInterval(function() {
++			if(i<text.length){
++				if(text[i]!="\n"){document.getElementsByTagName('p')[0].innerHTML+=text[i];}
++				if(text[i]=="\n"){document.getElementsByTagName('p')[0].innerHTML+="<br>"}
++				i+=1;document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(i)+'% 0px 10px 18px;';
++			}
++		}, 60);
++		}
++		xh.onerror = function() {}
++		xh.send()
++	}
++
++function take_next(){
++var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
++var xh = new XH();
++xh.open('GET', "/index.txt", true);
++xh.onload = function() {rtn(xh.responseText)}
++xh.onerror = function() {}
++xh.send()
++
++function rtn(it){
++	it=it.split(",");
++	for(var i=0;i!=it.length;i++){
++		if(it[i]==window.now){window.next=it[i+1]}
++	};
++}
++
++}
++
++function next_tap(){
++	if(window.next!=undefined){
++		clearInterval(window.timerId);
++		document.getElementsByTagName('p')[0].innerHTML="";
++		tell(window.next);
++	}
++}
+\ No newline at end of file
+Index: user/notu/pas.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- user/notu/pas.sha256	(date 1541004718735)
++++ user/notu/pas.sha256	(date 1541004718735)
+@@ -0,0 +1,1 @@
++e22605438b9fc1af016ef34b7d409cd9109ef3acff6b03abd35f9ae9ebae8165
+\ No newline at end of file
+Index: user/tester/pas.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- user/tester/pas.sha256	(date 1540847198057)
++++ user/tester/pas.sha256	(date 1540847198057)
+@@ -0,0 +1,1 @@
++dcfd0c417b8fccd9ba9a077f609edce3f28ffcc41f5f414d3465e47b1e370975
+\ No newline at end of file

@@ -1,0 +1,12 @@
+	p{
+		position: center;
+		height: 100%;
+		min-width: 10%;
+		padding: 20% 0px 10px 10px;
+	}
+	body{
+		font-size: 60px
+	}
+	li {
+    list-style-type: none; /* Убираем маркеры */
+   }
