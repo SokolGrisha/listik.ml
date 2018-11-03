@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php session_start(); if(isset($_SESSION["u"])){echo '<script type="/text/javascript">window.u="'.$_SESSION["u"].'"</script>';} ?>
     <title>TS</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/static/b-reboot.min.css">
@@ -10,6 +9,7 @@
     <script type="text/javascript" src="/static/index.js"></script>
 </head>
 <body onload="document.getElementsByTagName('p')[0].focus()">
+<?php error_reporting(E_ERROR | E_PARSE); session_start(); if(isset($_SESSION["u"])){echo '<username>'.$_SESSION["u"].'</username>';} ?>
 <div><p contenteditable="true" id="story"></p></div>
 
 <div class="navbar-top">

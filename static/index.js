@@ -72,6 +72,7 @@ function story_load(){
 }
 
 function send() {
+	window.u=document.getElementsByTagName('username')[0].innerText;
     a=document.getElementsByTagName("p")[0].innerHTML; //take text from form
     for(var i=0;i<a.split("&nbsp;").length - 1;i++){a=a.replace("&nbsp;"," ")}
     for(var i=0;i<a.split("<div>").length - 1;i++){a=a.replace("<div>","≝")}

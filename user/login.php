@@ -19,8 +19,7 @@ if(isset($_POST["user"])&&isset($_POST["pass"])){
         if (isset($_POST["sign"])) {
             if (is_dir($_POST["user"]) == False) {
                 mkdir("./" . $_POST["user"]);
-                $
-                file_put_contents("./" . $_POST["user"] . "/pas.sha256", hash("sha256", $_POST["pass"]));
+                file_put_contents("./".$_POST["user"]."/pas.sha256", hash("sha256", $_POST["pass"]));
                 $_SESSION["u"] = $_POST["user"];
                 echo "True";
             } else {
