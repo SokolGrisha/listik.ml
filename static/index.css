@@ -30,3 +30,36 @@
         font-size: 100px;
 		border-top: gray solid 2px;
 	}
+	p#story{
+		height: 100%;
+		outline: none;
+	}
+	div.col#red{
+		color: red;
+	}
+	.login{
+		position: center;
+		height: 100%;
+		min-width: 10%;
+		padding: 20% 0 10px 10px;
+	}
+	.login button{
+		font-size: 60px;
+		border: 2px solid grey;
+		border-radius: 5px;
+		background-color: lightgery;
+	}
+	.login input{
+		font-size: 60px;
+		border: 2px solid grey;
+		border-radius: 5px;
+	}
+	.login input#password{
+		font-size: 60px;
+		border: 2px solid grey;
+		border-radius: 5px;
+		margin-bottom: 5%;
+	}
+	.userpage{
+		padding: 35% 0 10px 10px;
+	}

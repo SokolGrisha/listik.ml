@@ -10,9 +10,13 @@ zero.txt - start
     /exmp/
     index.php
     pas.sha256
+index.php (reg\log or user page)
+login.html (sign in or sign up)
+login.php (session allow\disallow)
 
 exampl.html (exmpl of html)
 index.html
-index.txt (not for robots, storiees by time)
+index.txt (not for robots, stories by time)
 create_story.php (create story)
 map.php (map by time)
+plan.plan (this file)

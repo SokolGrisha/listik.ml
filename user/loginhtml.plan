@@ -1,0 +1,6 @@
+form:
+<form class="login" action="login.php" method="POST">
+		@:<input type="text" name="user" size="10"><br>
+		<a style="font-size: 80px;">Пароль:</a><input type="password" name="pass" size="10"><br>
+		<button type="submit" name="enter">Войти</button><button type="submit" name="sign" style="margin-left: 10%;">Зарегестрироваться</button>
+	</form>

@@ -1,0 +1,10 @@
+take username
+<?php session_start(); if(isset($_SESSION["u"])){echo '<script type="text/javascript">window.u="'.$_SESSION["u"].'"</script>';} ?>
+
+focus on p
+document.getElementsByTagName('p')[0].focus()
+accept content in p
+contenteditable="true"
+
+sympl send
+📢

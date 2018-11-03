@@ -1,18 +1,14 @@
-function pp(i){
-		if((10-Math.round(i*2/250))>10){return (10-Math.round(i*2/250))}
-		else{return 10};
-	}
-/*pp - не нужно*/
+
 
 function tell(id){
 		window.now=id;
-		take_next()
+		take_next();
 		var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 		var xh = new XH();
 		xh.open('GET', "/story/"+id+".txt", true);
 		xh.onload = function() {
 			if(xh.responseText.split("≟")[0]!=xh.responseText){
-				document.getElementById("user").innerHTML='<a> Написал(а):'+xh.responseText.split("≟")[0]+'</a><br>';
+				document.getElementById("user").innerHTML='<a href="/story/'+id+'.html"> Написал(а): '+xh.responseText.split("≟")[0]+'</a><br>';
 				text=xh.responseText.split("≟")[1];
 			}
 			else{text=xh.responseText;}
@@ -31,14 +27,15 @@ function tell(id){
 		xh.send()
 	}
 
+// take next story
 function take_next(){
+//take by Req
 var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 var xh = new XH();
 xh.open('GET', "/index.txt", true);
-xh.onload = function() {rtn(xh.responseText);}
-xh.onerror = function() {}
-xh.send()
-
+xh.onload = function() {rtn(xh.responseText);};
+xh.send();
+//take nextleft & next right
 function rtn(it){
 	it=it.split(",");
 	for(var i=0;i!=it.length;i++){
@@ -51,9 +48,9 @@ function rtn(it){
 
 }
 
-
+//delete last story and start next
 function next_tap(p){
-	take_next()
+	take_next();
 	if(p=="r"&&window.nextr!=undefined){
 		clearInterval(window.timerId);
 		document.getElementsByTagName('p')[0].innerHTML="";
@@ -66,8 +63,26 @@ function next_tap(p){
 	}
 }
 
-function ol(){
+
+// for story pages
+function story_load(){
     /*document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(document.getElementsByTagName("p")[0].innerText.length)+'% 0px 10px 18px;';*/
     window.now=window.location.href.split("story/")[1].split(".html")[0];
     take_next()
+}
+
+function send() {
+    a=document.getElementsByTagName("p")[0].innerHTML; //take text from form
+    for(var i=0;i<a.split("&nbsp;").length - 1;i++){a=a.replace("&nbsp;"," ")}
+    for(var i=0;i<a.split("<div>").length - 1;i++){a=a.replace("<div>","≝")}
+    for(var i=0;i<a.split("<br>").length - 1;i++){a=a.replace("<br>","")}
+    for(var i=0;i<a.split("</div>").length - 1;i++){a=a.replace("</div>","")}
+    if(window.u==undefined){a="anon≟"+a}
+    else{a=window.u+"≟"+a}
+        var XH = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+        var xh = new XH();
+        xh.open('POST', "/create_story.php", true);
+        xh.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xh.send("i="+encodeURIComponent(a));
+        xh.onload = function() {window.location=xh.responseText}
 }
