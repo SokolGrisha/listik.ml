@@ -2,6 +2,7 @@ function pp(i){
 		if((10-Math.round(i*2/250))>10){return (10-Math.round(i*2/250))}
 		else{return 10};
 	}
+/*pp - не нужно*/
 
 function tell(id){
 		window.now=id;
@@ -22,7 +23,7 @@ function tell(id){
 			if(i<text.length){
 				if(text[i]!="\n"){document.getElementsByTagName('p')[0].innerHTML+=text[i];}
 				if(text[i]=="\n"){document.getElementsByTagName('p')[0].innerHTML+="<br>"}
-				i+=1;document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(i)+'% 0px 10px 18px;';
+				i+=1;/*document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(i)+'% 0px 10px 18px;';*/
 			}
 		}, 60);
 		}
@@ -66,7 +67,7 @@ function next_tap(p){
 }
 
 function ol(){
-    document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(document.getElementsByTagName("p")[0].innerText.length)+'% 0px 10px 18px;';
+    /*document.getElementsByTagName('p')[0].style='position: center;height: 100%;min-width: 10%;padding: '+pp(document.getElementsByTagName("p")[0].innerText.length)+'% 0px 10px 18px;';*/
     window.now=window.location.href.split("story/")[1].split(".html")[0];
     take_next()
 }

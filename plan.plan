@@ -1,0 +1,18 @@
+/static/ (not for robot)
+index.css
+index.js
+
+/story/ (for robot)
+index.php (php for session)
+zero.txt - start
+
+/user/ (not for robot)
+    /exmp/
+    index.php
+    pas.sha256
+
+exampl.html (exmpl of html)
+index.html
+index.txt (not for robots, storiees by time)
+create_story.php (create story)
+map.php (map by time)
